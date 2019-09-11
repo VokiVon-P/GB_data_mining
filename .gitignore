@@ -1,3 +1,7 @@
 _dt_mining
+out
 
 requirements.txt
+.vscode/launch.json
+.vscode/settings.json
+
