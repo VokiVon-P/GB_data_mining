@@ -1,17 +1,16 @@
+
 import requests
 import json
 
-""" import requests
-headers = {'User-agent': 'Mozilla/5.0',
-                    'Authorization':'Basic cG9zdG1hbjpwYXNzd29yZA=='}
-req = requests.get('https://postman-echo.com/basic-auth',headers=headers)
+headers = {'User-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 YaBrowser/19.9.0.1343 Yowser/2.5 Safari/537.36'
+            , 'Authorization':'Basic cG9zdG1hbjpwYXNzd29yZA=='
+}
+
+URL_service = 'https://postman-echo.com'
+URL_coomand = '/basic-auth'
+
+req = requests.get(f'{URL_service}{URL_coomand}',headers=headers)
 print('Заголовки: \n',  req.headers)
 print('Ответ: \n',  req.text)
 
-appid = 'b6907d289e10d714a6e88b30761fae22'
-service = 'https://samples.openweathermap.org/data/2.5/weather'
-req = requests.get(f'{service}?q=London,uk&appid={appid}')
-data = json.loads(req.text)
-print(f"В городе {data['name']} {data['main']['temp']} градусов по Кельвину")
-
- """
+ 
