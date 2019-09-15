@@ -16,21 +16,18 @@ class AvitoFlatsParser:
     BASE_URL = 'https://www.avito.ru'
 
     def __init__(self):
-
-        self._prev_url = ' '
         self._next_url = self.BASE_URL
 
 
     
     def parse(self, start_url):
         self._next_url = start_url
-        c_url = start_url
-        while (self._next_url != self._prev_url):
-            self._prev_url = c_url
-            c_url = self._next_url
+        while (self._next_url is not None):
+            #self._prev_url = c_url
+            #c_url = self._next_url
             ads_list = self.parse_page(self._next_url)
             #print(ads_list)
-            #self.save_to_mongo(ads_list)
+            self.save_to_mongo(ads_list)
 
 
 
@@ -56,16 +53,22 @@ class AvitoFlatsParser:
         body = soup.html.body
 
         result = body.findAll('span', attrs={'data-marker': 'page-title/text'})
-        print(result)
+        #print(result)
 
-        #next_page = body.find('a', attrs={'class':['pagination-page', 'js-pagination-next']})
+        # находим указатель на следующую сраницу
         next_page = body.find('a', attrs={'class':'js-pagination-next'})
-        self._next_url = f'{self.BASE_URL}{next_page.attrs.get("href")}'
+        if next_page is not None:
+            self._next_url = f'{self.BASE_URL}{next_page.attrs.get("href")}'
+        else:
+            self._next_url = None
         
         
         ads = body.findAll('div', attrs={'class': ['item', 'item_table clearfix', 'js-catalog-item-enum', 'item-with-contact', 'js-item-extended']})
         urls = [f'{self.BASE_URL}{itm.find("a").attrs["href"]}' for itm in ads]
         return urls
+
+
+        
 
 
     def save_to_mongo(self, urls: list):
@@ -75,15 +78,20 @@ class AvitoFlatsParser:
         for itm in urls:
             time.sleep(random.randint(1, 5))
             result = self.req_ads(itm)
-            print(result)
             collection.insert_one(result)
+            print('+', end='')
+
+        print(f'\tСохранено {len(urls)} элементов!')
+            
+            
 
 #
 
 
     
-url = 'https://www.avito.ru/zadonsk/kvartiry?cd=1'
-#url = 'https://www.avito.ru/sochi/kvartiry?cd=1'
+#url = 'https://www.avito.ru/zadonsk/kvartiry?cd=1'
+
+url = 'https://www.avito.ru/sochi/kvartiry?cd=1&district=209'
 
 parser = AvitoFlatsParser()
 parser.parse(url)
