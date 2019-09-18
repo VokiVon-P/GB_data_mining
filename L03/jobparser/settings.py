@@ -14,9 +14,17 @@ BOT_NAME = 'jobparser'
 SPIDER_MODULES = ['jobparser.spiders']
 NEWSPIDER_MODULE = 'jobparser.spiders'
 
+LOG_ENABLED = True
+LOG_LEVEL = 'DEBUG'
+LOG_FILE = 'jobparser_logs.txt'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'jobparser (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) ' \
+             'AppleWebKit/537.36 (KHTML, like Gecko) ' \
+             'Ubuntu Chromium/66.0.3359.181 ' \
+             'Chrome/66.0.3359.181 Safari/537.36'
+
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -64,9 +72,9 @@ COOKIES_ENABLED = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'jobparser.pipelines.JobparserPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'jobparser.pipelines.JobparserPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

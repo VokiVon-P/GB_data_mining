@@ -1,5 +1,6 @@
 _dt_mining
 __pycache__
+-tmp-
 
 requirements.txt
 .vscode/launch.json
@@ -7,3 +8,5 @@ requirements.txt
 
 auth_voki.py
 
+vacancy.sqlite
+jobparser_logs.txt
