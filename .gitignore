@@ -8,5 +8,6 @@ requirements.txt
 
 auth_voki.py
 
-vacancy.sqlite
 jobparser_logs.txt
+vacancy.sqlite
+vacancy.sqlite-journal

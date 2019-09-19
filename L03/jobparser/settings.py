@@ -27,6 +27,7 @@ USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) ' \
 
 
 # Obey robots.txt rules
+# для SuperJob пришлось отключить
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)

@@ -20,10 +20,8 @@ class SpjobSpider(scrapy.Spider):
         # обрабатываем список 
         for link in vacancy:
             yield response.follow(link, callback=self.vacansy_parse)
-            print(link)
-        
-        
-
+            # print(link)
+     
 
     def vacansy_parse(self, response: HtmlResponse):
         # разбираем страницу вакансии
@@ -38,5 +36,5 @@ class SpjobSpider(scrapy.Spider):
             salary = response.css('span.ZON4b::text').extract_first()
         # отдаем готовый элемент для дальнейшего сохранения в паплайнах
         yield JobparserItem(name=name, company_name=company_name, salary=salary, url = url)
-        print(f'{name}\n{salary}\n{company_name}\n{url}')
+        # print(f'{name}\n{salary}\n{company_name}\n{url}')
 

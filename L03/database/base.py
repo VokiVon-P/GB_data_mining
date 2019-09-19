@@ -10,6 +10,7 @@ class VacancyDB:
         self.url = url
         pass
 
+
     def add_salary(self, db_item):
         self.engine = create_engine(self.url)
         Base.metadata.create_all(self.engine)
