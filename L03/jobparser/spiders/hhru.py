@@ -9,6 +9,7 @@ class HhruSpider(scrapy.Spider):
     allowed_domains = ['hh.ru']
     start_urls = ['https://hh.ru/search/vacancy?text=Python&area=113&st=searchVacancy']
 
+
     def parse(self, response: HtmlResponse):
         next_page = response.css('a.HH-Pager-Controls-Next::attr(href)').extract_first()
         yield response.follow(next_page, callback=self.parse)
@@ -19,9 +20,12 @@ class HhruSpider(scrapy.Spider):
         for link in vacancy:
             yield response.follow(link, callback=self.vacansy_parse)
 
+
     def vacansy_parse(self, response: HtmlResponse):
         name = response.css('div.vacancy-title h1.header::text').extract_first()
+        url = response.url
         company_name = response.css('a.vacancy-company-name span::text').extract_first().strip()
         salary = response.css('div.vacancy-title p.vacancy-salary::text').extract_first()
 
-        yield JobparserItem(name=name, company_name=company_name, salary=salary)
+        yield JobparserItem(name=name, company_name=company_name, salary=salary, url = url)
+        

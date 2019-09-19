@@ -14,7 +14,7 @@ if __name__ == '__main__':
     crawler_settings.setmodule(settings)
     process = CrawlerProcess(settings=crawler_settings)
     # краулер HeadHunter
-    #process.crawl(HhruSpider)
+    process.crawl(HhruSpider)
     # краулер SuperJob
     process.crawl(SpjobSpider)
     process.start()

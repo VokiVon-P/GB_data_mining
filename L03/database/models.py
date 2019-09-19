@@ -12,9 +12,11 @@ class Vacancy(Base):
     name = Column(String, nullable=True)
     company_name = Column(String, nullable=True)
     salary = Column(String, nullable=True)
+    url = Column(String, nullable=True)
 
     def __init__(self, **kwargs):
         self.spider = kwargs.get('spider')
         self.name = kwargs.get('name')
         self.company_name = kwargs.get('company_name')
         self.salary = kwargs.get('salary')
+        self.url = kwargs.get('url')
