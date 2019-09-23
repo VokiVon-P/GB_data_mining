@@ -8,6 +8,11 @@ class HhruSpider(scrapy.Spider):
     name = 'hhru'
     allowed_domains = ['hh.ru']
     start_urls = ['https://hh.ru/search/vacancy?text=Python&area=113&st=searchVacancy']
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'jobparser.pipelines.JobparserPipeline': 400
+        }
+    }
 
     def parse(self, response: HtmlResponse):
         next_page = response.css('a.HH-Pager-Controls-Next::attr(href)').extract_first()

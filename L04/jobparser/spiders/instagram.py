@@ -5,6 +5,7 @@ import scrapy
 from scrapy.http import HtmlResponse
 from urllib.parse import urlencode, urljoin
 from copy import deepcopy
+from jobparser.items import InstaItem
 
 
 class InstagramSpider(scrapy.Spider):
@@ -17,6 +18,11 @@ class InstagramSpider(scrapy.Spider):
     #variables_base = {'fetch_mutual': 'false', "include_reel": 'true', "first": 100}
     followers = {}
     posts = {}
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'jobparser.pipelines.InstaParserPipeline': 400
+        }
+    }
 
     def __init__(self, user_links, login, pswrd, *args, **kwargs):
         self.user_links = user_links
@@ -82,7 +88,7 @@ class InstagramSpider(scrapy.Spider):
 
     def get_posts_info(self, posts : list):
         """ выбираем только нужные данные из поста """
-        result = []
+        result = {}
         for item in posts:
             node = item.get('node')
             post = {}
@@ -93,7 +99,7 @@ class InstagramSpider(scrapy.Spider):
             post['shortcode'] = node.get('shortcode')
             post['caption'] = node.get('edge_media_to_caption').get('edges')[0].get('node').get('text')
             post['comment_users'] = [item.get('node').get('owner').get('username') for item in node.get('edge_media_to_comment').get('edges')]
-            result.append(post)
+            result[post['id']] = post
         return result
             
 
@@ -107,7 +113,8 @@ class InstagramSpider(scrapy.Spider):
             else:
                 pass
 
-            print(self.posts[user] ['posts'][0])
+            print(self.posts[user] ['posts'])
+            yield InstaItem(name=user, posts=self.posts[user])
     
 
 """

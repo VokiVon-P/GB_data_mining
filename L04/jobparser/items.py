@@ -13,3 +13,12 @@ class JobparserItem(scrapy.Item):
     _id = scrapy.Field()
     name = scrapy.Field()
     salary = scrapy.Field()
+
+
+
+class InstaItem(scrapy.Item):
+    # define the fields for your item here like:
+    _id = scrapy.Field()
+    name = scrapy.Field()
+    posts = scrapy.Field()
+

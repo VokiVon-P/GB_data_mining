@@ -21,3 +21,18 @@ class JobparserPipeline(object):
         db_item = Vacancy(name=item.get('name'), spider=spider.name, salary=item.get('salary'))
         self.sql_db.add_salary(db_item)
         return item
+
+
+class InstaParserPipeline(object):
+    def __init__(self):
+        client = MongoClient('localhost', 27017)
+        self.mongo_base = client.insta
+
+    def process_item(self, item, spider):
+        collection = self.mongo_base[item.get('name')]
+        # пака пытаемся записать сразу - потом подкорректируем
+        collection.insert_many([item.get('posts')])
+        #collection.insert_many([item.get('posts').get('posts')])
+        # for post in item.get('posts').get('posts'):
+        #     collection.insert_one(post)
+        return item
