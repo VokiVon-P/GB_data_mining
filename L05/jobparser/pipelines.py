@@ -18,6 +18,8 @@ class JobparserPipeline(object):
     def process_item(self, item, spider):
         collection = self.mongo_base[spider.name]
         collection.insert_one(item)
-        db_item = Vacancy(name=item.get('name'), spider=spider.name, salary=item.get('salary'))
+        # добавил преобразование в строку
+        sal = str(item.get('salary'))
+        db_item = Vacancy(name=item.get('name'), spider=spider.name, salary=sal)
         self.sql_db.add_salary(db_item)
         return item
