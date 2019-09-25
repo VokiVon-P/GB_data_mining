@@ -13,3 +13,8 @@ vacancy.sqlite-journal
 
 L02/Les_02.py
 
+jobparser_logs.txt
+vacancy.sqlite
+vacancy.sqlite-journal
+
+L04/.env
