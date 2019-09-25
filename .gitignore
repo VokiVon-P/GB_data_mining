@@ -7,7 +7,9 @@ requirements.txt
 .vscode/settings.json
 
 auth_voki.py
-
 jobparser_logs.txt
 vacancy.sqlite
 vacancy.sqlite-journal
+
+L02/Les_02.py
+
