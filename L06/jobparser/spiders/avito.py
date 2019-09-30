@@ -3,7 +3,7 @@ import scrapy
 from scrapy.http import HtmlResponse
 from scrapy.loader import ItemLoader
 from jobparser.items import AvitoRealEstate
-from scrapy.loader.processors import MapCompose, TakeFirst
+
 
 
 class AvitoSpider(scrapy.Spider):
@@ -28,17 +28,13 @@ class AvitoSpider(scrapy.Spider):
         p_keys = list(map(lambda x: x.replace(': ', ''), param_loader.get_xpath('//li[@class = "item-params-list-item"]/span[@class = "item-params-label"]/text()')))
         # получим значения - очистку и конвертацию будем делать на этапе паплайна
         p_values = param_loader.get_xpath('//li[@class = "item-params-list-item"]/text()[2]')
-        # p_values = list(map(lambda k: k.replace('\xa0м²',''), map(lambda x: x.strip(), p_values)))
-        # p_values = list(map(lambda k: k.replace('\xa0м²',''), map(str.strip, p_values)))
+        # можно сразу почистить значения, но сейчас делаю это в паплайне - для обучения
+            # p_values = list(map(lambda k: k.replace('\xa0м²',''), map(lambda x: x.strip(), p_values)))
+            # p_values = list(map(lambda k: k.replace('\xa0м²',''), map(str.strip, p_values)))
+
         # создадим словарь с параметрами
         params = dict(zip(p_keys, p_values))
         
         param_loader.add_value('params', params) 
         
-
-        #param_loader.add_xpath('p_vals', '//li[@class = "item-params-list-item"]/text()')
-
-        # _tmp_values = response.xpath('//div[contains(@class, "item-params")]/ul//li[@class = "item-params-list-item"]/span/text()').extract()
-        # loader.add_xpath('params','//div[contains(@class, "item-params")]//ul[contains(@class, "item-params-list-item")]')
-        # response.xpath('//div[contains(@class, "item-params")]/ul//li/span')
         yield loader.load_item()
