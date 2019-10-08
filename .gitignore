@@ -3,8 +3,7 @@ __pycache__
 -tmp-
 
 requirements.txt
-.vscode/launch.json
-.vscode/settings.json
+.vscode
 
 auth_voki.py
 jobparser_logs.txt
@@ -17,7 +16,9 @@ jobparser_logs.txt
 vacancy.sqlite
 vacancy.sqlite-journal
 
-L04/.env
+
+.env
 L05/.gitignore
-L06/.env
+
 images
+debug.log
