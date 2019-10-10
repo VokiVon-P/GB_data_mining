@@ -26,3 +26,13 @@ class JobparserItem(scrapy.Item):
     _id = scrapy.Field()
     name = scrapy.Field()
     salary = scrapy.Field()
+
+
+class FacebookItem(scrapy.Item):
+    # define the fields for your item here like:
+    _id = scrapy.Field()
+    name = scrapy.Field()
+    birthdate = scrapy.Field()
+    photos = scrapy.Field()
+    friends_count = scrapy.Field()
+    friends = scrapy.Field()

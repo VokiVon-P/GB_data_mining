@@ -14,7 +14,7 @@ from scrapy.pipelines.images import ImagesPipeline
 class JobparserPipeline(object):
     def __init__(self):
         client = MongoClient('localhost', 27017)
-        self.mongo_base = client.vacancy
+        self.mongo_base = client.fb_friends
         #self.sql_db = VacancyDB('sqlite:///vacancy.sqlite')
 
     def process_item(self, item, spider):
