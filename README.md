@@ -4,4 +4,4 @@
 - работа с запросами request
 - разбор web с помощью bootstrap, scrapy
 - selenium
-- забись в sqllite, mongoDB
+- запись в sqllite, mongoDB
